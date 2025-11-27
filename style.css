@@ -1,0 +1,84 @@
+p {
+    font-family: Arial;
+
+}
+body {
+    margin: 0px;
+    padding: 0px;
+    background-color: rgb(53, 53, 53);
+}
+.grid-box {
+    display: grid;
+    grid-template-columns: 240px 4fr 1fr;
+    border: 2px solid rgb(156, 156, 156);
+    box-shadow: 10px 10px 10px rgba(255, 255, 255, 0.7)
+}
+.title-grid {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    background-color: rgb(28, 28, 32);
+    
+    border-right: none;
+}
+
+.title {
+    
+    font-size: 22px;
+    margin-left: 20px;
+    color: rgb(220, 220, 220);
+    box-shadow: 5px 5px 5px rgba(255, 255, 255, 0.3);
+    transition: all 0.5s;
+}
+.title:hover {
+    color: rgb(255, 255, 255);
+    box-shadow: 5px 5px 5px rgba(255, 255, 255, 0.7);
+
+}
+.search-container {
+    display: flex;
+    align-items: center;
+    background-color: rgb(28, 28, 32);
+    vertical-align: middle;
+}
+
+
+
+.search-text {
+    color: white;
+    font-size: 18px;
+    font-size: 18px;
+}
+
+.search-type {
+    color: white;
+    font-size: 18px;
+}
+
+.search-box {
+    padding: 10px;
+    width: 600px;
+    margin-left: 40px;
+    border-radius: 8px;
+    font-size: 16px;
+    box-shadow: 5px 5px 5px rgba(255, 255, 255, 0.1);
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+    background-color: rgb(28, 28, 32);
+}
+.button-style {
+    font-size: 18px;
+    background-color: rgb(45, 45, 52);
+    color: rgb(230, 230, 230);
+    box-shadow: 5px 5px 7px rgba(255, 255, 255, 0.2);
+    padding: 8px 20px;
+    border: none;
+    border-radius: 16px;
+}
+
+.button-style:hover {
+    background: rgb(60, 60, 70);
+    color: white;
+}
