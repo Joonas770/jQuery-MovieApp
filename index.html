@@ -5,28 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>jQuery-MovieApp</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
     <div class="grid-box">
         <div class="title-grid">
             <p class="title">ScreenSpace<p>
         </div>
+    
         <div class="search-container">
             <p class="search-text">Search: <p>
             <form class="search-type">
                 <input type="radio" name="selection" id="all">
                 <label for="all">All</label>
-                <input type="radio" name="selectio" id="movies">
+                <input type="radio" name="selection" id="movies">
                 <label for="movies">Movies</label>
                 <input type="radio" name="selection" id="series">
                 <label for="series">Series</label>
             </form>
-            <input type="text" class="search-box" placeholder="Type to search">
+            <input type="text" id="user-input" class="search-box" placeholder="Type to search">
         </div>
+        
         <div class="button-container">
-            <button class="button-style">Explore</button>
+            <button id="explore-button"class="button-style">Search</button>
         </div>
     </div>
-    
+    <div class="main-content" id="vanta-bg">
+        <p id="title2" class="title-2">ScreenSpace: Find Movies and Series</p>
+    </div>
+    <div class="footer">
+        <p class="footer-text">© 2025 ScreenSpace. All rights reserved.</p>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.fog.min.js"></script>
+    <script src="script.js"></script>
+
+
+
 </body>
 </html>

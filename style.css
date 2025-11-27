@@ -11,7 +11,8 @@ body {
     display: grid;
     grid-template-columns: 240px 4fr 1fr;
     border: 2px solid rgb(156, 156, 156);
-    box-shadow: 10px 10px 10px rgba(255, 255, 255, 0.7)
+    box-shadow: 0px 9px 6px rgba(255, 255, 255, 0.4);
+    height: auto;
 }
 .title-grid {
     display: grid;
@@ -81,4 +82,37 @@ body {
 .button-style:hover {
     background: rgb(60, 60, 70);
     color: white;
+}
+.title-2 {
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    box-shadow: 0px 9px 0px rgba(255, 255, 255, 0.5);
+    margin: 0; /* Poista oletusmarginit */
+}
+
+.main-content {
+    display: flex;
+    height: 810px;
+    justify-content: center;
+    align-items: center; /* Lisää tämä! */
+}
+.search-type input[type="radio"] {
+    /* Asettaa valitun tilan värin, joka tekee täplästä sinisen */
+    accent-color: #007bff; /* Kirkas sininen */
+    
+    /* Voit säätää kokoa, jos haluat sen näkyvämmäksi */
+    transform: scale(1.2); 
+    margin-right: 5px; /* Pieni tila tekstin ja napin välille */
+}
+
+.footer {
+    background-color: rgb(28, 28, 32);
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    border-top: solid 1px white;
 }
