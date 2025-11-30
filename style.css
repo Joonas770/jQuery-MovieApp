@@ -1,40 +1,51 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 p {
     font-family: Arial;
+}
 
-}
 body {
-    margin: 0px;
-    padding: 0px;
     background-color: rgb(53, 53, 53);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
+
 .grid-box {
     display: grid;
     grid-template-columns: 240px 4fr 1fr;
     border: 2px solid rgb(156, 156, 156);
-    box-shadow: 0px 9px 6px rgba(255, 255, 255, 0.4);
-    height: auto;
+    height: 80px;
 }
+
 .title-grid {
     display: grid;
     grid-template-columns: 160px 1fr;
     background-color: rgb(28, 28, 32);
-    
     border-right: none;
 }
 
 .title {
-    
     font-size: 22px;
-    margin-left: 20px;
+    height: 50px;
     color: rgb(220, 220, 220);
-    box-shadow: 5px 5px 5px rgba(255, 255, 255, 0.3);
+    box-shadow: 0px 3px 0px 0px rgba(255, 255, 255, 0.3);
     transition: all 0.5s;
+    padding: 25px 0px;
+    margin-left: 15px;
+
 }
+
 .title:hover {
     color: rgb(255, 255, 255);
     box-shadow: 5px 5px 5px rgba(255, 255, 255, 0.7);
-
 }
+
 .search-container {
     display: flex;
     align-items: center;
@@ -42,11 +53,8 @@ body {
     vertical-align: middle;
 }
 
-
-
 .search-text {
     color: white;
-    font-size: 18px;
     font-size: 18px;
 }
 
@@ -69,6 +77,7 @@ body {
     align-items: center;
     background-color: rgb(28, 28, 32);
 }
+
 .button-style {
     font-size: 18px;
     background-color: rgb(45, 45, 52);
@@ -77,42 +86,111 @@ body {
     padding: 8px 20px;
     border: none;
     border-radius: 16px;
+    cursor: pointer;
 }
 
 .button-style:hover {
     background: rgb(60, 60, 70);
     color: white;
 }
+
 .title-2 {
     color: white;
     font-size: 40px;
     font-weight: bold;
     box-shadow: 0px 9px 0px rgba(255, 255, 255, 0.5);
-    margin: 0; /* Poista oletusmarginit */
+    text-align: center;
+    padding: 40px 0;
+}
+
+.container-2 {
+    flex: 1;
+    position: relative;
 }
 
 .main-content {
-    display: flex;
-    height: 810px;
-    justify-content: center;
-    align-items: center; /* Lisää tämä! */
+    min-height: 600px;
+    padding: 20px;
 }
+
+#vanta-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+#results {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 30px;
+    padding: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.result-item {
+    background-color: rgba(40, 40, 45, 0.9);
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.result-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
+}
+
+.poster-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.movie-title {
+    color: white;
+    font-size: 16px;
+    margin: 10px 0 5px 0;
+    font-weight: bold;
+}
+
+.movie-year {
+    color: rgb(180, 180, 180);
+    font-size: 14px;
+}
+
 .search-type input[type="radio"] {
-    /* Asettaa valitun tilan värin, joka tekee täplästä sinisen */
-    accent-color: #007bff; /* Kirkas sininen */
-    
-    /* Voit säätää kokoa, jos haluat sen näkyvämmäksi */
-    transform: scale(1.2); 
-    margin-right: 5px; /* Pieni tila tekstin ja napin välille */
+    accent-color: #007bff;
+    transform: scale(1.2);
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.search-type label {
+    cursor: pointer;
+    margin-right: 15px;
 }
 
 .footer {
+
     background-color: rgb(28, 28, 32);
     color: white;
     text-align: center;
-    padding: 10px 0;
-    position: relative;
-    bottom: 0;
+    margin-top: 100px;
+    padding: 20px 0;
     width: 100%;
     border-top: solid 1px white;
+    margin-top: auto;
+}
+
+.footer-text {
+    margin: 0;
 }

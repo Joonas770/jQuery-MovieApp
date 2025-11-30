@@ -20,8 +20,13 @@ const moviesInput = $("#movies");
 const seriesInput = $("#series");
 const allInput = $("#all");
 
+const results = $("#results");
 
-const explore = $("#explore-button");
+// ScreenSpace painikkeen toiminnallisuus
+$(".title").on("click", function() {
+    location.reload();
+});
+
 
 // Hakutoiminto
 
@@ -43,23 +48,21 @@ $("#user-input").on("keydown", function(event) {
     }
 });
 
-//Search napin toiminnallisuus
-
-explore.on("click", function() {
-    console.log("Nappi toimii")
-        
-        // Tarkistus vaihe onko valittu movies, series vai all
-        if (moviesInput.is(":checked")) {
-            searchMovies();
-        }
-        else if (seriesInput.is(":checked")) {
-            searchSeries();
-        }
-        else if (allInput.is(":checked")) {
-            searchAll();
-        }
+// Search nappi toiminallisuus
+$("#explore-button").on("click", function(event) {
+    event.preventDefault();
+    
+    // Tarkistus vaihe onko valittu movies, series vai all
+    if (moviesInput.is(":checked")) {
+        searchMovies();
     }
-);
+    else if (seriesInput.is(":checked")) {
+        searchSeries();
+    }
+    else if (allInput.is(":checked")) {
+        searchAll();
+    }
+});
 
 // All Valinta defaulttina päällä, kun sivu ladataan
 
@@ -72,9 +75,29 @@ $(document).ready(function() {
 function searchAll() {
     hideTitle();
     const userInput = $("#user-input").val();
+    const results = $("#results");
     $.getJSON(`https://www.omdbapi.com/?s=${userInput}&apikey=54405f3f`)
     .done(function(data) {
-        console.log("Hakutulokset:", data);
+        // Mitä dataa halutaan: otsikko, vuosi ja kuva.
+        // Käytetään for each silmukkaa samaan ylläolevat datat
+        if (data.Response === "True") {
+            results.empty(); // Tyhjennetään aiemmat tulokset
+            data.Search.forEach(function(item) {
+                const title = item.Title;
+                const year = item.Year;
+                const poster = item.Poster !== "N/A" ? item.Poster : "placeholder.jpg"; // Placeholder kuva jos ei ole
+                const resultItem = `
+                    <div class="result-item">
+                        <img src="${poster}" alt="Poster of ${title}" class="poster-image"/>
+                        <h3 class="movie-title">${title}</h3>
+                        <p class="movie-year">${year}</p>
+                    </div>
+                `;
+                results.append(resultItem);     
+
+            });
+        }
+
 
     })
     .fail(function(error) {
@@ -83,15 +106,34 @@ function searchAll() {
     });
 }
 
+
+
 //Leffahaku
 function searchMovies() {
     hideTitle();
     const userInput = $("#user-input").val();
     $.getJSON(`https://www.omdbapi.com/?s=${userInput}&type=movie&apikey=54405f3f`)
     .done(function(data) {
-        console.log("Hakutulokset:", data);
+        // Mitä dataa halutaan: otsikko, vuosi ja kuva.
+        // Käytetään for each silmukkaa samaan ylläolevat datat
+        if (data.Response === "True") {
+            results.empty(); // Tyhjennetään aiemmat tulokset
+            data.Search.forEach(function(item) {
+                const title = item.Title;
+                const year = item.Year;
+                const poster = item.Poster !== "N/A" ? item.Poster : "placeholder.jpg"; // Placeholder kuva jos ei ole
+                const resultItem = `
+                    <div class="result-item">
+                        <img src="${poster}" alt="Poster of ${title}" class="poster-image"/>
+                        <h3 class="movie-title">${title}</h3>
+                        <p class="movie-year">${year}</p>
+                    </div>
+                `;
+                results.append(resultItem);     
 
-    }) 
+            });
+        }
+    })
     .fail(function(error) {
         console.error("Virhe!", error);
 
@@ -104,9 +146,26 @@ function searchSeries() {
     const userInput = $("#user-input").val();
     $.getJSON(`https://www.omdbapi.com/?s=${userInput}&type=series&apikey=54405f3f`)
     .done(function(data) {
-        console.log("Hakutulokset:", data);
+        // Mitä dataa halutaan: otsikko, vuosi ja kuva.
+        // Käytetään for each silmukkaa samaan ylläolevat datat
+        if (data.Response === "True") {
+            results.empty(); // Tyhjennetään aiemmat tulokset
+            data.Search.forEach(function(item) {
+                const title = item.Title;
+                const year = item.Year;
+                const poster = item.Poster !== "N/A" ? item.Poster : "placeholder.jpg"; // Placeholder kuva jos ei ole
+                const resultItem = `
+                    <div class="result-item">
+                        <img src="${poster}" alt="Poster of ${title}" class="poster-image"/>
+                        <h3 class="movie-title">${title}</h3>
+                        <p class="movie-year">${year}</p>
+                    </div>
+                `;
+                results.append(resultItem);     
 
-    }) 
+            });
+        }
+    })
     .fail(function(error) {
         console.error("Virhe!", error);
 
@@ -115,4 +174,8 @@ function searchSeries() {
 
 function hideTitle() {
     $("#title2").hide();
+}
+
+function showTitle() {
+    $("#title2").show();
 }
