@@ -13,10 +13,9 @@
             <div class="title-grid">
                 <p class="title">ScreenSpace</p>
             </div>
-        
-            <div class="search-container">
+            <div class="search-container" id="search-container">
                 <p class="search-text">Search:</p>
-                <form class="search-type">
+                <form class="search-type" id="suodatin">
                     <input type="radio" name="selection" id="all">
                     <label for="all">All</label>
                     <input type="radio" name="selection" id="movies">
@@ -36,13 +35,16 @@
             <p id="title2" class="title-2">ScreenSpace: Find Movies and Series</p>
             <div id="results">  
             </div>
+            <div class="detail-container" id="details-modal">
+
+            </div>
         </div>
     </div>
     <div class="footer">
         <p class="footer-text">© 2025 ScreenSpace. All rights reserved.</p>
     </div>
 
-
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.fog.min.js"></script>
     <script src="script.js"></script>

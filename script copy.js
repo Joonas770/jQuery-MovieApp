@@ -14,9 +14,12 @@ VANTA.FOG({
 
 
 // Const määritykset
+// Search box (käyttäjän syöte) id ="user-input", 
+
 const moviesInput = $("#movies");
 const seriesInput = $("#series");
 const allInput = $("#all");
+
 const results = $("#results");
 
 // ScreenSpace painikkeen toiminnallisuus
@@ -26,11 +29,13 @@ $(".title").on("click", function() {
 
 
 // Hakutoiminto
+
 $("#user-input").on("keydown", function(event) {
     if (event.key === "Enter") {
         event.preventDefault();
         console.log("Enter toimii")
         
+        // Tarkistus vaihe onko valittu movies, series vai all
         if (moviesInput.is(":checked")) {
             searchMovies();
         }
@@ -47,6 +52,7 @@ $("#user-input").on("keydown", function(event) {
 $("#explore-button").on("click", function(event) {
     event.preventDefault();
     
+    // Tarkistus vaihe onko valittu movies, series vai all
     if (moviesInput.is(":checked")) {
         searchMovies();
     }
@@ -59,49 +65,49 @@ $("#explore-button").on("click", function(event) {
 });
 
 // All Valinta defaulttina päällä, kun sivu ladataan
+
 $(document).ready(function() {
     allInput.prop("checked", true);
 });
 
 // Haetaan API
+
 function searchAll() {
     hideTitle();
     const userInput = $("#user-input").val();
-    
-    axios.get(`https://www.omdbapi.com/?s=${userInput}&apikey=54405f3f`)
-    .then(function(response) {
-        const data = response.data;
+    const results = $("#results");
+    $.getJSON(`https://www.omdbapi.com/?s=${userInput}&apikey=54405f3f`)
+    .done(function(data) {
+        // Mitä dataa halutaan: otsikko, vuosi ja kuva.
+        // Käytetään for each silmukkaa samaan ylläolevat datat
         if (data.Response === "True") {
-            results.empty();
-            $.each(data.Search, function(index, item) {
+            results.empty(); // Tyhjennetään aiemmat tulokset
+            $.each(data.Search, function(index,item) {
                 const title = item.Title;
                 const year = item.Year;
-                const poster = item.Poster !== "N/A" ? item.Poster : "placeholder.jpg";
-                const imdbID = item.imdbID;
-                console.log(imdbID);
+                const poster = item.Poster !== "N/A" ? item.Poster : "placeholder.jpg"; // Placeholder kuva jos ei ole
+                const imbdID = item.imdbID;
+                console.log(imbdID);
                 const resultItem = `
-                    <div class="result-item" data-imdbid="${imdbID}">
+                    <div class="result-item" data-imdbid="${imdbID}"">
                         <img src="${poster}" alt="Poster of ${title}" class="poster-image"/>
                         <h3 class="movie-title">${title}</h3>
                         <p class="movie-year">${year}</p>
                     </div>
                 `;
                 results.append(resultItem);
+                
+
             });
         }
-    })
-    .catch(function(error) {
-        console.error("Virhe!", error);
-    });
-}
 
 
-// Piilotetaan search elementit kun klikataan tulosta ja haetaan lisätietoja
 $(document).on('click', '.result-item', function() {
-    const imdbID = $(this).data('imdbid');
-    hideSearchElements();
+    // Haetaan korttiin tallennettu IMDb ID
+    const imdbID = $(this).data('imdbid'); 
     
     if (imdbID) {
+        // TÄMÄ FUNKTIO TARVITTAAN
         searchDetails(imdbID); 
         console.log("Klikattu ID:", imdbID);
     } else {
@@ -109,109 +115,124 @@ $(document).on('click', '.result-item', function() {
     }
 });
 
-// Haetaan yksityiskohtaiset tiedot
+
+// --- LISÄÄ TÄMÄ FUNKTIO KAIKKIEN HAKUFUNKTIOIDEN JÄLKEEN ---
+
 function searchDetails(imdbID) {
     const detailsModal = $("#details-modal"); 
     
+    // Piilota tuloslista ja näytä latausilmoitus
     $("#results").hide();
-    hideSearchElements();
     detailsModal.html('<p>Ladataan yksityiskohtaisia tietoja...</p>').show(); 
     
-    axios.get(`https://www.omdbapi.com/?i=${imdbID}&apikey=54405f3f`)
-    .then(function(response) {
-        const data = response.data;
-        detailsModal.empty();
-        
-        if (data.Response === "True") {
-            const detailContent = `
-                <div class="movie-details">
-                    <img src="${data.Poster}" alt="Poster of ${data.Title}" />
-                    <h2>${data.Title} (${data.Year})</h2>
-                    <p><strong>Ohjaaja:</strong> ${data.Director}</p>
-                    <p><strong>Genre:</strong> ${data.Genre}</p>
-                    <p><strong>Juoni:</strong> ${data.Plot}</p>
-                    <p><strong>Arvosana:</strong> ${data.imdbRating}</p>
-                    <button id="close-details">Palaa tuloksiin</button>
-                </div>
-            `;
-            detailsModal.append(detailContent);
-        } else {
-            detailsModal.html('<p>Yksityiskohtia ei löytynyt.</p>');
-        }
+    // API-kutsu tarkemmille tiedoille käyttämällä ID:tä (i=)
+    $.getJSON(`https://www.omdbapi.com/?i=${imdbID}&apikey=54405f3f`)
+        .done(function(data) {
+            detailsModal.empty();
+            
+            if (data.Response === "True") {
+                const detailContent = `
+                    <div class="movie-details">
+                        <h2>${data.Title} (${data.Year})</h2>
+                        <img src="${data.Poster}" alt="Poster of ${data.Title}" />
+                        <p><strong>Ohjaaja:</strong> ${data.Director}</p>
+                        <p><strong>Genre:</strong> ${data.Genre}</p>
+                        <p><strong>Juoni:</strong> ${data.Plot}</p>
+                        <p><strong>Arvosana:</strong> ${data.imdbRating}</p>
+                        <button id="close-details">Palaa tuloksiin</button>
+                    </div>
+                `;
+                detailsModal.append(detailContent);
+            } else {
+                detailsModal.html('<p>Yksityiskohtia ei löytynyt.</p>');
+            }
+        })
+        .fail(function(error) {
+            console.error("Virhe yksityiskohtien haussa!", error);
+            detailsModal.html('<p>Virhe tietojen haussa.</p>');
+        });
+}
+
+// Lisää kuuntelija palaa-napille
+$(document).on('click', '#close-details', function() {
+    $("#details-modal").hide();
+    $("#results").show(); // Näytä tuloslista uudelleen
+});
+
     })
-    .catch(function(error) {
-        console.error("Virhe yksityiskohtien haussa!", error);
-        detailsModal.html('<p>Virhe tietojen haussa.</p>');
+    .fail(function(error) {
+        console.error("Virhe!", error);
+
     });
 }
 
-// Palaa-nappi
-$(document).on('click', '#close-details', function() {
-    $("#details-modal").hide();
-    $("#results").show();
-    showSearchElements();
-});
+// Valitun viihdykkeen tarkemmat tiedot
+
 
 //Leffahaku
 function searchMovies() {
     hideTitle();
     const userInput = $("#user-input").val();
-    axios.get(`https://www.omdbapi.com/?s=${userInput}&type=movie&apikey=54405f3f`)
-    .then(function(response) {
-        const data = response.data;
+    $.getJSON(`https://www.omdbapi.com/?s=${userInput}&type=movie&apikey=54405f3f`)
+    .done(function(data) {
+        
+        // Mitä dataa halutaan: otsikko, vuosi ja kuva.
+        // Käytetään for each silmukkaa samaan ylläolevat datat
         if (data.Response === "True") {
-            results.empty();
-            $.each(data.Search, function(index, item) {
+
+            // Tyhjennetään aiemmat tulokset
+            results.empty(); 
+            $.each(data.Search, function(index,item) {
                 const title = item.Title;
                 const year = item.Year;
-                const poster = item.Poster !== "N/A" ? item.Poster : "placeholder.jpg";
-                const imdbID = item.imdbID;
-                console.log(imdbID);
+                const poster = item.Poster !== "N/A" ? item.Poster : "placeholder.jpg"; // Placeholder kuva jos ei ole
                 const resultItem = `
-                    <div class="result-item" data-imdbid="${imdbID}">
+                    <div class="result-item">
                         <img src="${poster}" alt="Poster of ${title}" class="poster-image"/>
                         <h3 class="movie-title">${title}</h3>
                         <p class="movie-year">${year}</p>
                     </div>
                 `;
-                results.append(resultItem);
+                results.append(resultItem);     
+
             });
         }
     })
-    .catch(function(error) {
+    .fail(function(error) {
         console.error("Virhe!", error);
+
     });
 }
-
 
 // Sarjahaku
 function searchSeries() {
     hideTitle();
     const userInput = $("#user-input").val();
-    axios.get(`https://www.omdbapi.com/?s=${userInput}&type=series&apikey=54405f3f`)
-    .then(function(response) {
-        const data = response.data;
+    $.getJSON(`https://www.omdbapi.com/?s=${userInput}&type=series&apikey=54405f3f`)
+    .done(function(data) {
+        // Mitä dataa halutaan: otsikko, vuosi ja kuva.
+        // Käytetään for each silmukkaa samaan ylläolevat datat
         if (data.Response === "True") {
-            results.empty();
-            $.each(data.Search, function(index, item) {
+            results.empty(); // Tyhjennetään aiemmat tulokset
+            $.each(data.Search, function(index,item) {
                 const title = item.Title;
                 const year = item.Year;
-                const poster = item.Poster !== "N/A" ? item.Poster : "placeholder.jpg";
-                const imdbID = item.imdbID;
-                console.log(imdbID);
+                const poster = item.Poster !== "N/A" ? item.Poster : "placeholder.jpg"; // Placeholder kuva jos ei ole
                 const resultItem = `
-                    <div class="result-item" data-imdbid="${imdbID}">
+                    <div class="result-item">
                         <img src="${poster}" alt="Poster of ${title}" class="poster-image"/>
                         <h3 class="movie-title">${title}</h3>
                         <p class="movie-year">${year}</p>
                     </div>
                 `;
-                results.append(resultItem);
+                results.append(resultItem);     
+
             });
         }
     })
-    .catch(function(error) {
+    .fail(function(error) {
         console.error("Virhe!", error);
+
     });
 }
 
@@ -221,16 +242,4 @@ function hideTitle() {
 
 function showTitle() {
     $("#title2").show();
-}
-
-// Hakupalkin piilotus, kun käyttäjä katselee leffan/sarjan lisätietoja
-function hideSearchElements() {
-    // Piilottaa hakukentät kun valitaan sarja/leffa listasta
-    $("#user-input, #explore-button, .search-type, .search-text").addClass("hidden");
-    $('label[for="movies"], label[for="series"], label[for="all"]').addClass("hidden");
-}
-function showSearchElements() {
-    //Näyttää hakukentät kun painetaan takaisin nappia
-    $("#user-input, #explore-button, .search-type, .search-text").removeClass("hidden");
-    $('label[for="movies"], label[for="series"], label[for="all"]').removeClass("hidden");
 }
