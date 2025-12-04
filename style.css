@@ -1,4 +1,3 @@
-
 * {
     margin: 0;
     padding: 0;
@@ -8,13 +7,27 @@
 p {
     font-family: Arial;
 }
-
+html {
+    height: 100%;
+}
 body {
-    background-color: rgb(53, 53, 53);
+    background-color: transparent;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    margin: 0;
 }
+
+#vanta-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* pysyy kaiken muun alla */
+    pointer-events: none; /* ei estä klikkauksia */
+}
+
 
 .grid-box {
     display: grid;
@@ -111,15 +124,8 @@ body {
 .main-content {
     min-height: 600px;
     padding: 20px;
-}
-
-#vanta-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
+    position: relative;
+    z-index: 2;
 }
 
 #nav-bar {
@@ -237,13 +243,13 @@ body {
     color: white;
     text-align: center;
     margin-top: 100px;
-    padding: 20px 0;
     width: 100%;
     border-top: solid 1px white;
     margin-top: auto;
 }
 
 .footer-text {
+    padding: 20px;
     margin: 0;
 }
 
