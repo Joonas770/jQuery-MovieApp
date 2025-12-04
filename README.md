@@ -6,11 +6,12 @@ Joachim Pehkonen, Joonas Sipilä
 
 Verkkolinkit: Pääset julkaistuun sovellukseen käsiksi osoitteessa google.com Linkki projektin videoesittelyyn google.com
 
-* Sovelluksen netlify linkki: 
+* Sovelluksen netlify linkki:
+https://jquery-movieapp.netlify.app/
 
 
 * Github linkki: 
-
+https://github.com/Joonas770/jQuery-MovieApp
 
 
 **Työn jakautuminen Miten työmäärä jaettiin? Kuka teki mitä? Miten yhteistyö sujui?**
@@ -19,10 +20,9 @@ Projektia tehtiin sovittuina aikoina, tehtävät jaettiin tasapuolisesti ja mole
 
 **Esimerkkejä tehdyistä tehtävistä**
 
-Joonas: Suodata valikkojen tekeminen, DOM skriptausta ja Api kutsujen tekeminen ja näiden datojen
-laittaminen eri muotoihin. haeElokuva funktion toiminnalisuuden työstämistä. Projektin visuaalisuuden tekemistä CSS tiedostoon sekä itse javascriptiin.
+Joonas: Sumutausta vanta.js, jQuery DOM-skriptausta, API-kutsuja, sivuston struktuuria sekä visuaalisuutta sekä sivuston suunnittelua.
 
-Joachim: Lisätietoja nappi + elokuvien ja sarjojen tietojen / javascriptin DOM skriptausta sekä Ajax kutsujen työstämistä. Arvostelija "suodattimen" työstämistä ja sen toiminnallisuuden "parantaminen". 
+Joachim: jQuery DOM-skriptausta, API-kutsuja, sivuston rakenteen ideointia, CSS-tiedoston tyylien määrittelyä. 
 
 **Oma arvio työstä ja oman osaamisen kehittymisestä**
 
@@ -30,33 +30,37 @@ Joachim: Lisätietoja nappi + elokuvien ja sarjojen tietojen / javascriptin DOM 
 
 Joonaksen arvio ja kehittyminen: 
 
-Mielestäni onnistuin projektin tekemisessä hyvin. Projekti alkoi vähä heikosti kun yritettiin ekana tehdä Finnkino elokuvateattereiden aikatauluja, mutta API-avain ei valitettavasti toiminut. Lopulta päädyimme tekemään omdb apia hyödytäen elokuvien ja sarjojen etsimispalvelu. Ongelmia silti esintyi projektissa, jos yritti tarkistella koodia kun molemmat työstivät projektia se oli vaikeaa, koska koodissa saatoi tällöin olla virhe kun toisella kesken vielä tekeminen.
+Mielestäni onnistuin projektin tekemisessä hyvin. Projekti alkoi tutkimalla aluksi JQuery sekä muita javascript kirjastoja ja näiden toimivuutta. Tämän jälkeen ruvettiin tekemään sivuston struktuuria ja visuaalisuutta. Käytimme Vanta.js sumutausta efektiä ja tässä onnistuin mielestäni hyvin, mutta tässä ilmeni myös ongelma ei meinattu saamaan tätä venymään leveys että korkeus suuntaan lopulta saimme tämän onnistumaan. Olen tyytyväinen miltä projekti näyttää visuaalisesti ja toimivuudeltaan. Opin mielestäni lisää taas API kutsuista ja uutena JQuery toimivuudesta sekä tämän hyödyistä. JQuery käyttö vielä vaati kehitystä, mutta huomaan selkeästi tämän nopeuttavan Web sovellusten tekoa.
 
-Asiat, jossa onnistuin mielestäni: API kutsujen tekeminen sekä tämän datan hyödyntäminen ja DOM skriptaus.
+Projektin parantaminen: Lisää toimminalisuuksia sekä saisi enemmän elokuvia/sarjoja näytölle, mutta tähän ei voida vaikuttaa koska pystyi maksimissaan samaan 10 eri elokuvan tai sarjan tiedot ulos kerralla.
 
-Projektin paranataminen: Yleinen visuaalisuus ja toimminnot. Toimintoja enemmän ja nykyisiä parantaa ja yleinen visuaalisuus hienommaksi. 
+Opin: JQuery käyttöä ja sen toiminalisuuksia. Käyttämään API-kutsuja paremmin sekä lisää javascriptistä.
 
-Projektistä jäi puuttumaan erilaiset toiminnot kuten elokuvien/sarjojen järjestely julkaisuvuoden mukaan ja tallentaminen localstoragee omia elokuvia/sarjoja, josta näkisi kaikki katsottavat elokuvat. Valitettavasti aika ei riittäny näiden tekemiseen.3FCDA
-
-Opin: Hyödyntämään dataa tekemistäni API kutsuista. Parannettua lisää DOM-skriptaus taitojani. Visuaalisuuden ymmärtämistä (CSS).
-
-Arvosanaksi antaisin: Antaisin projektille 8-9 pistettä. Projektissa olisi voinut olla enemmän toimintoja, vaikka olen tyytyväinen nykyisiin toimintoihin myös. Ylipäätän mielestäni onnistuimme hyvin ja saimme tehtyä toimivan elokuva/sarja haku sovelluksen. Molemmat saivat tehtyä esittelyvideot ja palautuksen ajoissa.
+Arvosanaksi antaisin: Antaisin projektille 9-10 pistettä. Projektissa hyödynsimme mielestäni hyvin JQuery:ä ja datan hakeminen on helpompaa kuin aikaisemmassa projektissa ja käytimme toista Javascript kirjastoa visuaalisuuteen. Yleinen visuaalisuus on kiva ja toimiva.
 
 Linkki Joonaksen video esittelyyn:
-
-http://youtube.com/watch?v=XYIa5HkyphM
+https://www.youtube.com/watch?v=fNcZnT2WzMM
 
 
 Joachimin arvio ja kehittyminen:
 
-Projekti sujui hyvin ja molemmat työstivät sitä yhteisillä kokoontumiskerroilla. Joonas ehti aloittaa ensiksi sivun rakenteen kanssa ja molemmat sitten työstivät projektia samaan aikaan Visual Studio Coden Live Share -toiminnon avulla. 
+Projekti sujui hyvin ja molemmat työstivät sitä yhteisillä kokoontumiskerroilla. Joonas ehti aloittaa ensiksi sivun rakenteen kanssa ja molemmat sitten työstivät projektia samaan aikaan Visual Studio Coden Live Share -toiminnon avulla. Työstimme molemmat aikalailla samoja kohtia, koska käytännössä meidän piti saada vain "all" suodatin toimimaan, jonka jälkeen sitä piti vain vähän hienosäätää leffa ja sarja osioita, jotta molempien API-linkit hakivat tyypit: series ja movies, tällä saatiin nopeasti perusidea ja oikeat tiedot kaikille suodattimille tehtyä.
+
+Sovelluksesta ei varsinaisesti jäänyt uupumaan mitään konkreettista, halusimme, että tämä eroaisi hieman projekti 2:ta, joten pyrimme keskittymään enemmän jQuery DOM-skriptaukseen ja siihen, että sivuston toiminnallisuus olisi kunnossa sekä visuaalisesti miellyttävä. Toki olisi lisätietoihin olisi voinut sisällyttää enemmän tietoa, kuten meillä oli projekti 2:ssa.
+
+Onnistuin mielestäni jQuery DOM-skriptauksessa ja API-kutsuissa. Opin ohjelmoimaan jQuery DOM-skriptauksella ja kehittämään API-kutsuja
+
+Parantamista olisi varmaan sen kanssa, että API saisi useamman tuloksen sivulle, mutta tyydyimme nyt tähän max 10 tuloksen lopputulemaan. 
+
+Kaiketi tästä voisi myös 9-10 antaa, kun aikalailla kaikki vaadittu on saatu sivulle. Toki on noita pieniä juttuja, mitä olisi voinut muokata, kuten ulkonäkö ja toiminnot olisi voineet olla hieman parempia, jäi itseäni hieman mietityttämään, että kuinka paljon tuo VANTA.js sumutausta vaikuttaa loppupeleissä nettisivun suorituskykyyn/nopeuteen, mutta muuten olen varsin tyytyväinen lopputulokseen.
+
 
 Linkki Joachimin video esittelyyn:
 
 https://www.youtube.com/watch?v=xVFO_qv0otA 
 
 **Molempien työtunnit:**
-Työstimme projektia n. ~14, pyrimme tekemään projektia päivittäin 2-4 tuntia.
+Työstimme projektia n. ~16, pyrimme tekemään projektia päivittäin 2-4 tuntia.
 
 **Palaute opettajalle kurssista sekä itse opetuksesta tähän saakka**
 
@@ -82,8 +86,10 @@ Jotkut julisteet ei saata näkyä, koska niitä ei löydy OMDB API:sta, mutta mu
 
 **Kuvakaappaukset Lisää tähän vähintään yksi kuvakaappaus toimivasta sovelluksesta:**
 
-Tähän kuvia :)
-
+Tähän kuvia :
+![Etusivu](img/etusivu.png)
+![Hakemisen tulokset](img/hakusivu.png)
+![Lisätietoa elokuvasta/sarjasta](img/lisätietoasivu.png)
 Kuvat: Joonas Sipilä & Joachim Pehkonen
 
 **Teknologiat**
